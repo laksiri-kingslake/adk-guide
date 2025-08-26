@@ -1,5 +1,17 @@
 from google.adk.agents.llm_agent import Agent
 
+application_default_credentials, _ = google.auth.default()
+credentials_config = BigQueryCredentialsConfig(
+  credentials=application_default_credentials
+)
+
+tool_config = BigQueryToolConfig(write_mode=WriteMode.BLOCKED)
+
+bigquery_toolset = BigQueryToolset(
+  credentials_config=credentials_config, 
+  bigquery_tool_config=tool_config
+)
+
 async def update_bigquery_api_count(
    tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext, tool_response: Dict)
   
